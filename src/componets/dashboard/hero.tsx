@@ -91,6 +91,25 @@ const Hero: React.FC = () => {
             <option value="Toronto">Toronto</option>
           </select>
         </div>
+
+        {/* submit button  */}
+    <div >
+      <button 
+        type="submit" 
+        style={{
+          padding: "10px 20px",
+          fontSize: "16px",
+          backgroundColor: "#4CAF50",  // Green background
+          color: "white",               // White text
+          border: "none",               // No border
+          borderRadius: "5px",          // Rounded corners
+          cursor: "pointer",            // Pointer on hover
+          outline: "none"               // No outline when focused
+        }}
+      >
+        Submit
+      </button>
+    </div>
       </div>
     </>
   );
