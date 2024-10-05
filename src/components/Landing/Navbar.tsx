@@ -6,10 +6,7 @@ import { cn } from "@/lib/utils";
 export function NavbarDemo() {
   return (
     <div className="relative w-full flex items-center justify-center">
-      <Navbar className="top-2" />
-      <p className="text-black dark:text-white">
-        The Navbar will show on top of the page
-      </p>
+      <Navbar className="top-4" />
     </div>
   );
 }
@@ -22,7 +19,7 @@ function Navbar({ className }: { className?: string }) {
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Services">
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col space-y-4 text-sm ">
             <HoveredLink href="/web-dev">Web Development</HoveredLink>
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
             <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
