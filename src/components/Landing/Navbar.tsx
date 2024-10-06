@@ -31,7 +31,7 @@ function Navbar({ className }: { className?: string }) {
           </Link>
           </div>
         <div className="px-8">
-          <Link href="/talk"> 
+          <Link href="#"> 
              <MenuItem setActive={setActive} active={active} item="Talk to Experts"/>
           </Link>
           </div>
