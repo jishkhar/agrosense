@@ -5,31 +5,67 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sun, Cloud, Droplets, Wind, Umbrella, ThermometerSun, AlertTriangle } from 'lucide-react'
 
+interface WeatherCondition {
+  text: string;
+}
+
+interface CurrentWeather {
+  temp_c: number;
+  condition: WeatherCondition;
+  humidity: number;
+  wind_kph: number;
+  uv: number;
+  air_quality: {
+    pm2_5: number;
+  };
+}
+
+interface ForecastDay {
+  date: string;
+  day: {
+    maxtemp_c: number;
+    mintemp_c: number;
+    condition: WeatherCondition;
+  };
+}
+
+interface WeatherData {
+  current: CurrentWeather;
+  forecast: {
+    forecastday: ForecastDay[];
+  };
+  alerts?: {
+    alert: {
+      event: string;
+    }[];
+  };
+}
+
 interface WeatherProps {
   city: string;
 }
 
 export default function Weather({ city }: WeatherProps) {
-  const [weatherData, setWeatherData] = useState(null)
-  const [error, setError] = useState(null)
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const apiKey = '018bbd5c4c98460cbe7161736240510'
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&alerts=yes&aqi=yes`
+    const apiKey = '018bbd5c4c98460cbe7161736240510';
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&alerts=yes&aqi=yes`;
 
     fetch(url)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText)
+          throw new Error('Network response was not ok ' + response.statusText);
         }
-        return response.json()
+        return response.json();
       })
       .then(data => setWeatherData(data))
-      .catch(error => {
-        setError(error)
-        console.error('There has been a problem with your fetch operation:', error)
-      })
-  }, [city])
+      .catch((error) => {
+        setError(error.message); // string error
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }, [city]);
 
   if (error) {
     return (
@@ -41,7 +77,7 @@ export default function Weather({ city }: WeatherProps) {
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   if (!weatherData) {
@@ -55,25 +91,25 @@ export default function Weather({ city }: WeatherProps) {
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
-  const getWeatherIcon = (condition:any) => {
+  const getWeatherIcon = (condition: string) => {
     switch (condition.toLowerCase()) {
       case 'sunny':
       case 'clear':
-        return <Sun className="w-12 h-12 text-yellow-500" />
+        return <Sun className="w-12 h-12 text-yellow-500" />;
       case 'cloudy':
       case 'partly cloudy':
-        return <Cloud className="w-12 h-12 text-gray-500" />
+        return <Cloud className="w-12 h-12 text-gray-500" />;
       case 'rain':
       case 'light rain':
       case 'moderate rain':
-        return <Umbrella className="w-12 h-12 text-blue-500" />
+        return <Umbrella className="w-12 h-12 text-blue-500" />;
       default:
-        return <Sun className="w-12 h-12 text-yellow-500" />
+        return <Sun className="w-12 h-12 text-yellow-500" />;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 py-12 px-4 sm:px-6 lg:px-8">
@@ -139,23 +175,24 @@ export default function Weather({ city }: WeatherProps) {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
+                  <p>UV Index</p>
                   <div className="flex items-center">
-                    <ThermometerSun className="w-6 h-6 text-yellow-500 mr-2" />
-                    <span>UV Index</span>
+                    <ThermometerSun className="w-6 h-6 text-red-500 mr-2" />
+                    <span>{weatherData.current.uv}</span>
                   </div>
-                  <span className="font-semibold">{weatherData.current.uv ?? 'N/A'}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <AlertTriangle className="w-6 h-6 text-red-500 mr-2" />
-                    <span>Air Quality (PM2.5)</span>
-                  </div>
-                  <span className="font-semibold">{weatherData.current.air_quality?.pm2_5.toFixed(2) ?? 'N/A'}</span>
+                  <p>Air Quality (PM2.5)</p>
+                  <span>{weatherData.current.air_quality.pm2_5} µg/m³</span>
                 </div>
-                {weatherData.alerts?.alert?.length > 0 && (
-                  <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded" role="alert">
-                    <p className="font-bold">Weather Alert</p>
-                    <p>{weatherData.alerts.alert[0].event}</p>
+                {weatherData.alerts?.alert && weatherData.alerts.alert.length > 0 && (
+                  <div className="p-4 bg-red-100 rounded-lg">
+                    <h3 className="font-semibold text-red-600">Alerts</h3>
+                    <ul className="list-disc list-inside">
+                      {weatherData.alerts.alert.map((alert, index) => (
+                        <li key={index}>{alert.event}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
@@ -164,5 +201,5 @@ export default function Weather({ city }: WeatherProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
