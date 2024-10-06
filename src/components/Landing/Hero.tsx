@@ -1,6 +1,7 @@
 import React from "react";
 import { NavbarDemo } from "./Navbar";
 import Image from "next/image";
+import Link from "next/link";
 // import Background from '../Landing/Background';
 
 const Hero = () => {
@@ -20,6 +21,7 @@ const Hero = () => {
 
         <div id="main" className="flex text-2xl  p-2 relative z-10">
           <div id="logo" className="mt-7 ml-36">
+            <Link href="/dashboard">
             <Image
               src="/img/logo.png"
               alt="Logo"
@@ -27,6 +29,7 @@ const Hero = () => {
               height={30}
               priority
             />
+            </Link>
           </div>
           <NavbarDemo />
           <div className="flex mr-36 m-5 gap-4">
@@ -75,10 +78,11 @@ const Hero = () => {
                 easier to manage your water resources, improve crop yield, and
                 plan efficiently.
               </p>
-
+             <Link href="/dashboard">
               <button className=" mt-8 text-2xl p-3 bg-green-400 rounded-lg hover:bg-green-300 text-black border-green-800  transition-colors duration-100">
                 EXPLORE TOOLS
               </button>
+              </Link>
             </div>
           </div>
         </div>
