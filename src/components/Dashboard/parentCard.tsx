@@ -1,17 +1,17 @@
-"use client";
-import React, { useState } from "react";
-import { FocusCards } from "./focusCards"; // Adjust the path as needed
+"use client"
 
-const ParentComponent = () => {
-  const [cards] = useState([
-    { title: "Weather", src: "/img/one.jpeg" },
-    { title: "Water level", src: "/img/img2.jpg" },
-    { title: "Moisture level", src: "/im.jpg" },
-  ]);
+import React from "react"
+import { FocusCards } from "./focusCards"
 
-  return <div className="my-10">
-    <FocusCards cards={cards} />
-    </div>;
-};
-
-export default ParentComponent;
+export default function ParentComponent() {
+  const cards = [
+    { title: "Weather", src: "/img/one.jpeg", href: "/dashboard/weather" },
+    { title: "Moisture level", src: "/img/m.jpg", href: "/dashboard/moisture-level" },
+  ]
+  return (
+    <div className="my-10">
+      <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
+      <FocusCards cards={cards} />
+    </div>
+  )
+}
