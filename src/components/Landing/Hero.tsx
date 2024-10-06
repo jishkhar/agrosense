@@ -23,7 +23,7 @@ const Hero = () => {
             <Image
               src="/img/logo.png"
               alt="Logo"
-              width={220}
+              width={300}
               height={30}
               priority
             />
@@ -33,7 +33,7 @@ const Hero = () => {
             <div id="login">
               <button
                 type="button"
-                className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-lg rounded-full px-10 py-3.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-slate-200 focus:ring-4 focus:ring-gray-100 text-lg rounded-full px-10 py-3.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
               >
                 Login
               </button>
@@ -41,7 +41,7 @@ const Hero = () => {
             <div id="signup">
               <button
                 type="button"
-                className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 rounded-full text-lg px-10 py-3.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-slate-200 focus:ring-4 focus:ring-gray-100 rounded-full text-lg px-10 py-3.5 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
               >
                 SignUp
               </button>
